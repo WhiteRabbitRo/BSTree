@@ -339,10 +339,10 @@ void menu(BSTree::Tree* tree, bool empty) {  //меню
       bool b;
       b = tree->load(path);
       if (b) {
-        cout << "Дерево успешно полученно\n";
+        cout << "Дерево успешно получено\n";
         empty = false;
       } else
-        cout << "Дерево не было полученно\n";
+        cout << "Дерево не было получено\n";
     } break;
     case 7: {
       if (empty) {
