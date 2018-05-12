@@ -18,10 +18,12 @@ Also implemented are methods such as an initialization list and two statements: 
 You can compile the program through the command line of the terminal:
 
 To compile MAIN file use:
+
 $ g++ -I./include -std=c++14 -c sources/main.cpp
 $ g++ main.o
 
 To compile EXAMPLE file use:
+
 $ g++ -I./include -I./sources/bstree.cpp -std=c++14 -c examples/example.cpp
 $ g++ example.o
 
