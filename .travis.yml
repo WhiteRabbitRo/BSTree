@@ -69,5 +69,6 @@ before_script:
   - which $CXX
   - $CXX --version
   - cd ${TRAVIS_BUILD_DIR}
+  - cmake -H. -B_builds
 script:
-- g++ -I./include -I./sources -std=c++11 -o sources/main.cpp
+- cmake --build _builds
