@@ -1,4 +1,4 @@
-#include "tree.cpp"
+#include "bstree.cpp"
 using namespace BSTree;
 int main(){
     // Пример работы программы
