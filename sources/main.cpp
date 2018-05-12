@@ -1,23 +1,12 @@
-#include "bstree.cpp"
+#include "tree.cpp"
 
 using namespace BSTree;
-void menu(Tree*, bool);  //меню
+void menu(Tree*, bool); //меню
 int main(int argc, char* argv[]) {
-  setlocale(LC_ALL, "Rus");
-  bool empty = true;  //для пустого дерева
-
-  Tree tree;  //наше дерево
-
-  bool suc = false;  //проверка успешности добавления элементов в дерево
-  if (argc > 1) {
-    for (unsigned int i = 1; i < argc; i++) suc = tree.insert(atoi(argv[i]));
-    if (suc)
-      cout << "ДЕРЕВО УСПЕШНО СФОРМИРОВАНО" << endl;
-    else
-      cout << "ПОВТОРЯЮЩИЕСЯ ЭЛЕМЕНТЫ УДАЛЕНЫ" << endl;
-    empty = false;
-  } else
-    empty = true;
-
-  menu(&tree, empty);
+    setlocale(LC_ALL, "Rus");
+    Tree tree; //наше дерево
+    for (unsigned int i = 1; i < argc; i++)
+        tree.insert(atoi(argv[i]));
+    
+    menu(&tree, tree.empty_check());
 }
