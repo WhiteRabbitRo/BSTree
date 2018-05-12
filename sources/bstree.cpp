@@ -3,7 +3,7 @@
 #include <sys/stat.h>
 #include <fstream>
 #include <initializer_list>
-#include "tree.hpp"
+#include "bstree.hpp"
 using namespace std;
 void BSTree::Tree::clean(Node*& node) {
     //обратный обход для удаления
