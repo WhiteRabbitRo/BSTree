@@ -27,6 +27,11 @@ To compile EXAMPLE file use:
 $ g++ -I./include -I./sources/bstree.cpp -std=c++14 -c examples/example.cpp
 $ g++ example.o
 
+Or using CMake:
+
+$ cmake -H. -B_build
+$ cmake --build _build
+
 Or with the help of built-in IDE-environment compilers.
 
 # How to run the program
