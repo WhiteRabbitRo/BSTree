@@ -1,7 +1,7 @@
 # BSTree
 C++ Project "Binary Search Tree"
 
-**General information
+**General information**
 
 Your attention is represented by the implementation of a binary search tree in the programming language C++. The following functions are implemented in this assembly (a.k.a class methods) for working with BSTree: 
 
@@ -15,7 +15,7 @@ Your attention is represented by the implementation of a binary search tree in t
 
 Also implemented are methods such as an initialization list and two statements: output to the stream and an assignment operator.
 
-**How to compile the program
+**How to compile the program**
 
 You can compile the program through the command line of the terminal:
 
@@ -36,7 +36,7 @@ $ cmake --build _build
 ```
 Or with the help of built-in IDE-environment compilers.
 
-**How to run the program
+**How to run the program**
 
 The format of running the program through the command line is as follows:
 ```ShellSession
