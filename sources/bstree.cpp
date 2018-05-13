@@ -237,7 +237,6 @@ auto print_oper(std::ostream& stream, const BSTree::Node* node) -> std::ostream&
         }
         bool BSTree::Tree::load(const std::string& path) {
             //загрузка дерева из файла
-            bool b;
             std::ifstream fin(path.c_str());
             if (!fin.is_open())
                 return false;

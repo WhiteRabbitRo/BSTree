@@ -1,25 +1,19 @@
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.11) #версия cmake
 
-project(BSTree)
+project(BSTree) #название проекта
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(Boost_USE_STATIC_LIBS OFF) #линкуем динамически
+set(Boost_USE_MULTITHREADED ON) #подключаем треды
 
-option(BUILD_EXAMPLES "Build Examples" OFF)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall") #версия 14 и предупреждения
 
-set(${PROJECT_NAME}_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/sources/bstree.cpp")
+include_directories("include/" "sources/") #подключаем хэдэры
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/)
+add_executable(main sources/main.cpp) #собираем main
 
-add_library(${PROJECT_NAME} ${${PROJECT_NAME}_SOURCES})
-add_executable(example ${CMAKE_CURRENT_SOURCE_DIR}/examples/example.cpp)
 
-target_link_libraries(example BSTree)
-add_executable(main ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp)
-target_link_libraries(main BSTree)
-
-if(BUILD_EXAMPLES)
-    file(GLOB EXAMPLE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp")
+if(BUILD_EXAMPLES) #если включены примеры
+    file(GLOB EXAMPLE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp") #собрать в один список
     foreach(EXAMPLE_SOURCE ${EXAMPLE_SOURCES})
         get_filename_component(EXAMPLE_NAME ${EXAMPLE_SOURCE} NAME_WE)
         set(EXAMPLE_TARGET_NAME example_${EXAMPLE_NAME})
@@ -31,5 +25,4 @@ if(BUILD_EXAMPLES)
                 )
     endforeach(EXAMPLE_SOURCE ${EXAMPLE_SOURCES})
 endif()
-
 
