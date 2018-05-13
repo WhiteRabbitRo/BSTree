@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/WhiteRabbitRo/BSTree.svg?branch=master)](https://travis-ci.org/WhiteRabbitRo/BSTree)
+
 # BSTree
 C++ Project "Binary Search Tree"
 
