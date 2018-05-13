@@ -95,7 +95,7 @@ void right_sym_print(BSTree::Node* branch, int space) {
     if (branch == nullptr)
         return;
     right_sym_print(branch->right, space=space+2);
-    for (unsigned int i = 0;
+    for (int i = 0;
          i < space;
          i++)
         cout << " ";
