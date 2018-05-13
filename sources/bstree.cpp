@@ -146,15 +146,6 @@ void BSTree::Tree::print(traversal_order ord) {
             break;
     }
 }
-auto print_oper(std::ostream& stream, const BSTree::Node* node) -> std::ostream&{
-    //прямой обход для оператора <<
-    if (node != nullptr) {
-        stream << node->data << " ";
-        print_oper(stream, node->left);
-        print_oper(stream, node->right);
-        }
-        return stream;
-        }
         bool BSTree::Tree::remove (int val){
             //удаление узла
             Node* add = root;
