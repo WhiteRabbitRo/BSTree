@@ -27,13 +27,11 @@ $ g++ main.o
 To compile EXAMPLE file use:
 ```ShellSession
 $ g++ -I./include -I./sources/bstree.cpp -std=c++14 -c examples/example.cpp
-
 $ g++ example.o
 ```
 Or using CMake:
 ```ShellSession
 $ cmake -H. -B_build
-
 $ cmake --build _build
 ```
 Or with the help of built-in IDE-environment compilers.
