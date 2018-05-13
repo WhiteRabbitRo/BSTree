@@ -155,15 +155,6 @@ auto print_oper(std::ostream& stream, const BSTree::Node* node) -> std::ostream&
         }
         return stream;
         }
-        auto BSTree::operator<<(std::ostream& stream, const Tree& tree) -> std::ostream& {
-            //оператор вывода в поток
-            Node* out_ = tree.root;
-            if (out_ == nullptr) {
-                stream << "Дерево пусто\n";
-                return stream;
-            }
-            return print_oper(stream, tree.root);
-        }
         bool BSTree::Tree::remove (int val){
             //удаление узла
             Node* add = root;
