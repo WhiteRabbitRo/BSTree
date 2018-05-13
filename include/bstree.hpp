@@ -33,4 +33,13 @@ namespace BSTree
         void clean(Node*& node); //для удаления
     };
     void swap(Tree&, Node*); //поменять значения узлов деревьев
+    auto operator<<(std::ostream& stream, const Tree& tree) -> std::ostream& {
+            //оператор вывода в поток
+            Node* out_ = tree.root;
+            if (out_ == nullptr) {
+                stream << "Дерево пусто\n";
+                return stream;
+            }
+            return print_oper(stream, tree.root);
+        }
 }
