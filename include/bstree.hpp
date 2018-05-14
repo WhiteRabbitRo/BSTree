@@ -14,6 +14,7 @@ namespace BSTree
     public:
         Tree() : root{nullptr} {}; //конструктор
         Tree (std::initializer_list<int> list); // Лист инициализации
+        auto swap(Tree&) -> void; //поменять значения
         Tree(const Tree& tree); //конструктор копирования
         void print_tree(); //вывод дерева
         bool empty_check(); //проверка дерева на пустоту
@@ -32,7 +33,7 @@ namespace BSTree
         Node* root;
         void clean(Node*& node); //для удаления
     };
-    void swap(Tree&, Node*); //поменять значения узлов деревьев
+    void copy(Tree&, Node*); //поменять значения узлов деревьев (глубокое копирование)
     auto print_oper(std::ostream& stream, const BSTree::Node* node) -> std::ostream&{
     //прямой обход для оператора <<
     if (node != nullptr) {

@@ -65,22 +65,28 @@ bool BSTree::Tree::insert(int val){
     }
     return false;
 }
-auto BSTree::swap(Tree& tree, Node* curr) -> void {
+auto BSTree::Tree::swap(Tree& tree) -> void{
+    std::swap(this->root, tree.root);
+}
+auto BSTree::copy(Tree& tree, Node* curr) -> void {
     //поменять значения
     if (curr == nullptr)
         return;
     tree.insert(curr->data);
-    swap(tree, curr->left);
-    swap(tree, curr->right);
+    copy(tree, curr->left);
+    copy(tree, curr->right);
 }
 BSTree::Tree::Tree(const Tree& tree){
     //конструктор копирования
-    swap(*this, tree.root);
+    Tree tree1;
+    copy(tree1, tree.root);
+    this->swap(tree1);
 }
 auto BSTree::Tree::operator=(const Tree& tree) -> Tree& {
     //оператор присваивания
+    Tree tree1(tree);
     this->clean(root);
-    swap(*this, tree.root);
+    this->swap(tree1);
     return *this;
 }
 ;

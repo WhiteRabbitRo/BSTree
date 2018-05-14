@@ -14,7 +14,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall") #версия 14 и �
 
 include_directories("include/" "sources/") #подключаем хэдэры
 
-add_executable(main sources/main.cpp) #собираем main
+add_executable(bstree sources/main.cpp) #собираем main
 
 if(BUILD_EXAMPLES) #если включены примеры
     file(GLOB EXAMPLE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp") #собрать в один список
