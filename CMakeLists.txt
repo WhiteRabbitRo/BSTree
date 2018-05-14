@@ -19,6 +19,7 @@ add_executable(main sources/main.cpp) #собираем main
 if(BUILD_EXAMPLES) #если включены примеры
     file(GLOB EXAMPLE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp") #собрать в один список
     foreach(EXAMPLE_SOURCE ${EXAMPLE_SOURCES})
+        include_directories("include/" "sources/")
         get_filename_component(EXAMPLE_NAME ${EXAMPLE_SOURCE} NAME_WE)
         set(EXAMPLE_TARGET_NAME example_${EXAMPLE_NAME})
         add_executable(${EXAMPLE_TARGET_NAME} ${EXAMPLE_SOURCE})
