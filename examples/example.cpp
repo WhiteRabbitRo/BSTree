@@ -1,19 +1,20 @@
-#include "bstree.cpp"
+#include "bstree.hpp"
 using namespace BSTree;
+using namespace std;
 int main(){
     // Пример работы программы
-    Tree tree1; //пустое дерево
-    Tree tree2 = {5,1,3,6,8,4}; //инициализация листом
+    Tree<int> tree1; //пустое дерево
+    Tree<int> tree2 = {5,1,3,6,8,4}; //инициализация листом
     cout << tree1 << tree2 << endl; //вывод дерева (оператор <<)
     tree2.print_tree(); //вывод дерева графически
     tree1 = tree2; //оператор присваивания
-    tree1.print(direct); //прямой вывод дерева
+    tree1.print(cout, direct); //прямой вывод дерева
     cout << "\n";
-    Tree tree3;
+    Tree<int> tree3;
     tree3.insert(10); //функция добавления узла
     tree3.insert(1);
     tree3.insert(6);
-    tree3.print(symmetric); //симметричный вывод узлов
+    tree3.print(cout, symmetric); //симметричный вывод узлов
     cout << "\n";
     
     cout << boolalpha << tree2.exists(10) << "\n"; //функция поиска узла

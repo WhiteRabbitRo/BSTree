@@ -12,22 +12,12 @@ option(BUILD_EXAMPLES "Build examples" OFF)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall") #версия 14 и предупреждения
 
-include_directories("include/" "sources/") #подключаем хэдэры
+include_directories("include/") #подключаем хэдэры
 
 add_executable(bstree sources/main.cpp) #собираем main
 
 if(BUILD_EXAMPLES) #если включены примеры
     file(GLOB EXAMPLE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp") #собрать в один список
-    foreach(EXAMPLE_SOURCE ${EXAMPLE_SOURCES})
-        include_directories("include/" "sources/")
-        get_filename_component(EXAMPLE_NAME ${EXAMPLE_SOURCE} NAME_WE)
-        set(EXAMPLE_TARGET_NAME example_${EXAMPLE_NAME})
-        add_executable(${EXAMPLE_TARGET_NAME} ${EXAMPLE_SOURCE})
-        target_link_libraries(${EXAMPLE_TARGET_NAME} ${PROJECT_NAME})
-        set_target_properties(${EXAMPLE_TARGET_NAME} PROPERTIES OUTPUT_NAME ${EXAMPLE_NAME})
-        install(TARGETS ${EXAMPLE_TARGET_NAME}
-                RUNTIME DESTINATION bin
-                )
-    endforeach(EXAMPLE_SOURCE ${EXAMPLE_SOURCES})
+    add_executable(example "${EXAMPLE_SOURCES}")
 endif()
 
