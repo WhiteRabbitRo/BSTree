@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
                     cout << "Дерево пусто" << endl;
                     break;
                 }
-                cout << tree;
+                tree.print_tree();
             } break;
             case 2: {
                 if (tree.empty()) {

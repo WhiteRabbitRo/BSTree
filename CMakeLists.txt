@@ -5,10 +5,8 @@ project(BSTree) #название проекта
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(Boost_USE_STATIC_LIBS OFF) #линкуем динамически
-set(Boost_USE_MULTITHREADED ON) #подключаем треды
-
 option(BUILD_EXAMPLES "Build examples" OFF)
+option(BUILD_TESTS "Build tests" OFF)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall") #версия 14 и предупреждения
 
@@ -21,3 +19,9 @@ if(BUILD_EXAMPLES) #если включены примеры
     add_executable(example "${EXAMPLE_SOURCES}")
 endif()
 
+if(BUILD_TESTS) #если включены тесты
+	enable_testing()
+	file(GLOB ${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
+	add_executable(check ${${PROJECT_NAME}_TEST_SOURCES})
+	add_test(NAME check COMMAND check "-s" "-r" "compact" "--use-colour" "yes") 
+endif()
