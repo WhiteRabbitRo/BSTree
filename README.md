@@ -25,7 +25,7 @@ Also implemented are methods such as an initialization list and two statements: 
 $ cmake -H. -B_build
 $ cmake --build _build
 $ cd _build
-$ ./bstree <item1> <item2> <item3> ...
+$ ./main <item1> <item2> <item3> ...
 ```
 
 The program supports the ability to run with the input data specified (a space character is used as a separator), and also without input data.

@@ -59,7 +59,7 @@ public:
     };
 private:
     Node<T>* root;
-    void clean(Node<T>*&); //для удаления
+    void clean(Node<T>*); //для удаления
 };
 
 // ============================
@@ -67,17 +67,17 @@ private:
 // ============================
 
 template <typename T>
-void Tree<T>::clean(Node<T>*& node) { //отчистка дерева
-    if (node == nullptr)
-        return;
+void Tree<T>::clean(Node<T>* node) { //отчистка дерева
+    if (node != nullptr){
     clean(node->left);
     clean(node->right);
     delete node;
+}
     node = nullptr;
 }
 
 template <typename T>
-Tree<T>::Tree(std::initializer_list<T> list) { //лист инициализации
+Tree<T>::Tree(std::initializer_list<T> list) : Tree() { //лист инициализации
     this->clean(root);
     for (auto x: list)
         this->insert(x);

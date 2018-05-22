@@ -40,16 +40,16 @@ TEST_CASE("TRAVERSAL ORDER PRINT") {
 }
 
 TEST_CASE("ADDING NODE") {
-    Tree<int> tree = { 51, 93, 71, 16, 4, 53, 11, 32};
+    Tree<int> tree1 = { 51, 93, 71, 16, 4, 53, 11, 32};
     
-    tree.insert(80);
-    tree.insert(25);
-    tree.insert(1);
+    tree1.insert(80);
+    tree1.insert(25);
+    tree1.insert(1);
     
     std::string str;
     std::stringstream out(str);
     
-    tree.print(out, direct);
+    tree1.print(out, direct);
     
     std::string result = "51 16 4 1 11 32 25 93 71 53 80 ";
     std::string result_of_adding;
@@ -59,18 +59,18 @@ TEST_CASE("ADDING NODE") {
 }
 
 TEST_CASE("DELETING NODE") {
-    Tree<int> tree = { 25, 34, 12, 4, 7, 67, 78, 9, 0 };
+    Tree<int> tree2 = { 25, 34, 12, 4, 7, 67, 78, 9, 0 };
     
-    tree.remove(25);
-    tree.remove(0);
-    tree.remove(12);
+    tree2.remove(25);
+    tree2.remove(0);
+    tree2.remove(12);
     
-    std::string result = "34  4  7  9  67  78  ";
+    std::string result = "34 4 7 9 67 78 ";
     
     std::string str;
     std::stringstream out(str);
     
-    tree.print(out, direct);
+    tree2.print(out, direct);
     
     std::string result_of_deleting;
     getline(out, result_of_deleting);
@@ -79,13 +79,13 @@ TEST_CASE("DELETING NODE") {
 }
 
 TEST_CASE("INPUT IN FILE") {
-    Tree<int> tree = { 8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15 };
+    Tree<int> tree3 = { 8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15 };
     
-    std::string text = "8  4  2  1  3  6  5  7  12  10  9  11  14  13  15  ";
+    std::string text = "8 4 2 1 3 6 5 7 12 10 9 11 14 13 15 ";
     std::string buffer;
     std::stringstream out (buffer);
     
-    out << tree;
+    out << tree3;
     
     std::string result;
     getline(out, result);
@@ -94,14 +94,14 @@ TEST_CASE("INPUT IN FILE") {
 }
 
 TEST_CASE("EXISTENCE OF NODE") {
-    Tree<int> tree = { 8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15 };
-    REQUIRE(tree.exists(8) == true);
-    REQUIRE(tree.exists(100) == false);
+    Tree<int> tree4 = { 8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15 };
+    REQUIRE(tree4.exists(8) == true);
+    REQUIRE(tree4.exists(100) == false);
 }
 
 TEST_CASE("SAVE AND LOAD"){
-    Tree<int> tree = { 8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15 };
-    Tree<int> tree1;
+    Tree<int> tree5 = { 8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15 };
+    Tree<int> tree6;
     
     std::ofstream fout("answer.txt");
     fout << "y";
@@ -109,14 +109,14 @@ TEST_CASE("SAVE AND LOAD"){
     
     std::freopen("answer.txt", "r", stdin);
     
-    tree.save("BStree.txt");
-    tree1.load("BStree.txt");
+    tree5.save("BStree.txt");
+    tree6.load("BStree.txt");
     
-    std::string text = "8  4  2  1  3  6  5  7  12  10  9  11  14  13  15  ";
+    std::string text = "8 4 2 1 3 6 5 7 12 10 9 11 14 13 15 ";
     std::string buffer;
     std::stringstream out (buffer);
     
-    out << tree1;
+    out << tree6;
     
     std::string result;
     getline(out, result);
