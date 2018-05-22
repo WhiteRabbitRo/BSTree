@@ -19,6 +19,11 @@ Also implemented are methods such as an initialization list and two statements: 
 
 ## How to build the project
 
+```ShellSession
+$ cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=install
+$ cmake --build _build --target install
+```
+
 **To run the MAIN-file**
 
 ```ShellSession
@@ -34,7 +39,7 @@ The program supports the ability to run with the input data specified (a space c
 
 ```ShellSession
 $ cmake -H. -B_build -DBUILD_EXAMPLES=ON
-$ cmake --build _build
+$ cmake --build _build --target install
 $ cd _build
 $ ./example
 ```
