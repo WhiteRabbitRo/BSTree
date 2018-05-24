@@ -52,7 +52,7 @@ $ cmake --build _build --target install
 $ cmake --build _build --target test -- ARGS=--verbose
 ```
 
-##Benchmark
+## Benchmark
 
 The bencmark for 10 ^ (1 : 9) elements (all values in seconds):
 |Amount of elements|Adding|
