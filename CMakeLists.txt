@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_EXAMPLES "Build examples" OFF)
 option(BUILD_TESTS "Build tests" OFF)
+option(BUILD_BENCHMARK "Build benchmark" OFF)
 
 project(BStree)
 
@@ -36,8 +37,6 @@ install(TARGETS BStree
     LIBRARY DESTINATION lib
 )
 
-
-
 if(BUILD_TESTS)
 enable_testing()
 file(GLOB ${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
@@ -46,5 +45,8 @@ target_link_libraries(check ${PROJECT_NAME} ${DEPENDS_LIBRARIES})
 add_test(NAME check COMMAND check "-s" "-r" "compact" "--use-colour" "yes") 
 endif()
 
+if(BUILD_BENCHMARK)
+add_executable(benchmark ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark.cpp)
+endif()
 
 

@@ -173,6 +173,8 @@ bool Tree<T>::insert(T val) { //добавление узла
 
 template <typename T>
 bool Tree<T>::remove (T val) { //удаление узла
+    if (!this->exists(val))
+        return false;
     Node<T>* add = root;
     Node<T>* parrent = nullptr;
     while (add->data != val) {
