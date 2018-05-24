@@ -55,13 +55,14 @@ $ cmake --build _build --target test -- ARGS=--verbose
 ## Benchmark
 
 The bencmark for 10 ^ (1 : 9) elements (all values in seconds):
-|Amount of elements|Adding|
-|10^1|2.8e-05|
-|10^2|4e-05|
-|10^3|0.000458|
-|10^4|0.005158|
-|10^5|0.08702|
-|10^6|1.51488|
-|10^7|24.2715|
-|10^8|353.768|
-|10^9|4981.37|
+
+Amount of elements|Adding
+10^1|2.8e-05
+10^2|4e-05
+10^3|0.000458
+10^4|0.005158
+10^5|0.08702
+10^6|1.51488
+10^7|24.2715
+10^8|353.768
+10^9|4981.37
