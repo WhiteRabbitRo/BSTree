@@ -71,5 +71,7 @@ int main(){
             tree.remove(rand());
         end = clock() - start;
         fout << "e" << i << ": " << (float)end/CLOCKS_PER_SEC << std::endl;
+        
+        tree.~Tree();
     }
 }

@@ -56,6 +56,7 @@ public:
     };
     ~Tree() { //деструктор
         clean(root);
+        this->root = nullptr;
     };
 private:
     Node<T>* root;
@@ -251,6 +252,7 @@ bool Tree<T>::load(const std::string& path) { //загрузка дерева и
     if (!fin.is_open())
         return false;
     this->clean(root);
+    this->root = nullptr;
     T value;
     fin >> value;
     if(!fin)
