@@ -5,6 +5,11 @@ script:
 - cmake --build _build
 - cmake --build _build --target install
 - cmake --build _build --target test -- ARGS=--verbose
+- cmake -H. -B_build -DBUILD_BENCHMARK=ON
+- cmake --build _build --target install
+- cd _build
+- ./benchmark
+- open bench.txt
 
 addons:
   apt:
