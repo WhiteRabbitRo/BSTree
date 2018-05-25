@@ -2,19 +2,11 @@ language: cpp
 
 script:
 - cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install -DBUILD_TESTS=ON
-- cmake --build _build
 - cmake --build _build --target install
 - cmake --build _build --target test -- ARGS=--verbose
-- cmake -H. -B_build -DBUILD_BENCHMARK=ON
-- cmake --build _build --target install
-- cd _build
-- ./benchmark
-- open bench.txt
 
 addons:
   apt:
-    sources:
-      - george-edison55-precise-backports
     packages:
       - cmake
       - cmake-data
