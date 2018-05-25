@@ -58,7 +58,7 @@ The bencmark for 10 ^ (1 : 9) elements (all values in seconds):
 
 
 |Amount of elements|Adding|Existing|Print|Direct print|Symmetric print|Reverse print|Saving|Loading|Removing|
-|---|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|---|---|---|
 |10^1|3.1e-05|3e-06|0.000101|6e-06|5e-06|6e-06|0.000295|0.000178|4e-06|
 |10^2|3.7e-05|1.6e-05|0.00115|4e-05|4.1e-05|4e-05|3.9e-05|9.2e-05|1e-05|
 |10^3|0.000325|0.00015|0.010474|0.000395|0.000422|0.000391|4.7e-05|0.000188|8.9e-05|
