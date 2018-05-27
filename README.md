@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/WhiteRabbitRo/BSTree.svg?branch=master)](https://travis-ci.org/WhiteRabbitRo/BSTree)
 
-https://whiterabbitro.github.io/BSTree/index.html
+[Documentation] (https://whiterabbitro.github.io/BSTree/index.html)
 
 # BSTree
 C++ Project "Binary Search Tree"
