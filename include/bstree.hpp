@@ -4,93 +4,118 @@
 #include <fstream>
 #include <sstream>
 #include <cstring>
-#include <cstring>
 #include <initializer_list>
+#include <iterator.hpp>
 
 namespace BSTree
 {
-// ===============
-// Наш узел дерева
-// ===============
-
-template <typename T>
-struct Node {
-    T data;
-    Node<T>* left; //ветка влево
-    Node<T>* right; //ветка вправо
-    Node(T val) : data{val}, left{nullptr}, right{nullptr} {}; //конструтор
-};
-
-enum traversal_order { direct, symmetric, reverse}; //для обходов
-
-// ===========
-// Наше дерево
-// ===========
-
+///For order
+enum traversal_order { direct, symmetric, reverse};
+/*!
+ \brief Main class Binary Search Tree
+ */
 template <typename T>
 class Tree {
 public:
-    Tree() : root{nullptr} {}; //конструктор
-    Tree (std::initializer_list<T>); // Лист инициализации
-    auto swap(Tree<T>&) -> void; //поменять значения
-    Tree(const Tree<T>&); //конструктор копирования
-    void print_tree(); //вывод дерева
-    bool empty(); //проверка дерева на пустоту
-    bool exists(T); //поиск узла
-    bool insert(T); //добавление узла
-    bool remove(T); //удаление узла
-    bool save(const std::string&); //запись дерева в файл
-    bool load(const std::string&); //загрузка дерева из файла
-    auto print(std::ostream& stream, traversal_order ord) const -> std::ostream&; //вывод узлов тремя способами
+    ///Constructors
+    Tree() : root{nullptr} {};
+    Tree (std::initializer_list<T>);
+    auto swap(Tree<T>&) -> void;
+    Tree(const Tree<T>&);
+    
+    void print_tree(); ///Tree printing
+    bool empty(); ///Empty checking
+    bool exists(T); ///Existing of the node
+    bool insert(T); ///Adding new node
+    bool remove(T); ///Removing of node
+    bool save(const std::string&); ///Download into the file
+    bool load(const std::string&); ///Download from the file
+    auto print(std::ostream& stream, traversal_order ord) const -> std::ostream&; ///Three way printing
+    
+    auto begin() -> BSTI<T>{
+        Node<T>* node = root;
+        while(node->left!=nullptr)
+            node = node->left;
+        BSTI<T> it (node);
+        return it;
+    }
+    auto end() -> BSTI<T>{
+        Node<T>* node = root;
+        while(node->right!=nullptr)
+            node = node->right;
+        BSTI<T> it (node);
+        return it;
+    }
+    auto rbegin() -> BSTI<T> {
+        Node<T>* node = root;
+        while(node->right!=nullptr)
+            node = node->right;
+        BSTI<T> it (node);
+        return it;
+    }
+    auto rend() -> BSTI<T> {
+        Node<T>* node = root;
+        while(node->left!=nullptr)
+            node = node->left;
+        BSTI<T> it (node);
+        return it;
+    }
+    
+    ///Operators
     template <typename T1>
-    auto friend operator<<(std::ostream& stream, const Tree<T1>& tree) -> std::ostream& { //оператор вывода в поток
+    auto friend operator<<(std::ostream& stream, const Tree<T1>& tree) -> std::ostream& {
         tree.print(stream, direct);
         return stream;
     };
     template <typename T2>
-    auto operator=(const Tree<T2>& tree) -> Tree<T2>& {  //оператор присваивания
+    auto operator=(const Tree<T2>& tree) -> Tree<T2>& {
         Tree tr(tree);
         this->clean(root);
         this->swap(tr);
         return *this;
     };
-    ~Tree() { //деструктор
+    
+    ~Tree() { ///Destructor
         clean(root);
         this->root = nullptr;
     };
 private:
     Node<T>* root;
-    void clean(Node<T>*); //для удаления
+    void clean(Node<T>*);
 };
-
-// ============================
-// Реализация методов и функций
-// ============================
-
+    /*!
+     \brief Function for cleaning tree
+     */
 template <typename T>
-void Tree<T>::clean(Node<T>* node) { //отчистка дерева
+void Tree<T>::clean(Node<T>* node) {
     if (node != nullptr){
-    clean(node->left);
-    clean(node->right);
-    delete node;
-}
+        clean(node->left);
+        clean(node->right);
+        delete node;
+    }
     node = nullptr;
 }
-
+    /*!
+     \brief Initialization list
+     */
 template <typename T>
-Tree<T>::Tree(std::initializer_list<T> list) : Tree() { //лист инициализации
+Tree<T>::Tree(std::initializer_list<T> list) : Tree() {
     this->clean(root);
     for (auto x: list)
         this->insert(x);
 }
-
+    /*!
+     \brief Swaping of addresses
+     */
 template <typename T>
-auto Tree<T>::swap(Tree<T>& tree) -> void { //поменять адреса деревьев
+auto Tree<T>::swap(Tree<T>& tree) -> void {
     std::swap(this->root, tree.root);
 }
-
+    /*!
+     \brief Copy constructor
+     */
 template <typename T>
-Tree<T>::Tree(const Tree<T>& tree) { //конструктор копирования
+Tree<T>::Tree(const Tree<T>& tree) {
     this->clean(root);
     std::string str;
     std::stringstream out(str);
@@ -101,9 +126,11 @@ Tree<T>::Tree(const Tree<T>& tree) { //конструктор копирован
         this->insert(value);
     }
 }
-
+    /*!
+     \brief Symmetric right way(for the tree print)
+     */
 template <typename T>
-void right_sym_print(Node<T>* branch, int space) { //симметричный правый обход для функции вывода дерева
+void right_sym_print(Node<T>* branch, int space) {
     if (branch == nullptr)
         return;
     right_sym_print(branch->right, space=space+2);
@@ -112,24 +139,30 @@ void right_sym_print(Node<T>* branch, int space) { //симметричный п
     std::cout << "--" << branch->data << std::endl;
     right_sym_print(branch->left, space=space+2);
 }
-
+    /*!
+     \brief Tree print
+     */
 template <typename T>
-void Tree<T>::print_tree() { //вывод дерева
+void Tree<T>::print_tree() {
     right_sym_print(this->root->right, 0);
     std::cout << this->root->data << std::endl;
     right_sym_print(this->root->left, 0);
 }
-
+    /*!
+     \brief Empty check
+     */
 template <typename T>
-bool Tree<T>::empty() { //проверка на пустоту дерева
+bool Tree<T>::empty() {
     if (this->root == nullptr)
         return true;
     else
         return false;
 }
-
+    /*!
+     \brief Exist node
+     */
 template <typename T>
-bool Tree<T>::exists(T val) { //поиск узла
+bool Tree<T>::exists(T val) {
     if (root == nullptr)
         return false;
     Node<T>* find = root;
@@ -143,13 +176,16 @@ bool Tree<T>::exists(T val) { //поиск узла
     }
     return true;
 }
-
+    /*!
+     \brief Node adding
+     */
 template <typename T>
-bool Tree<T>::insert(T val) { //добавление узла
+bool Tree<T>::insert(T val) {
     if(exists(val))
         return false;
     if (root == nullptr) {
         root = new Node<T> {val};
+        root -> parent = nullptr;
         return true;
     }
     Node<T>* add = root;
@@ -157,6 +193,7 @@ bool Tree<T>::insert(T val) { //добавление узла
         if (val < add->data) {
             if (add->left == nullptr) {
                 add->left = new Node<T> {val};
+                add->left->parent = add;
                 return true;
             }
             add = add->left;
@@ -164,6 +201,7 @@ bool Tree<T>::insert(T val) { //добавление узла
         else {
             if (add->right == nullptr) {
                 add->right = new Node<T> {val};
+                add->right->parent = add;
                 return true;
             }
             add = add->right;
@@ -171,9 +209,11 @@ bool Tree<T>::insert(T val) { //добавление узла
     }
     return false;
 }
-
+    /*!
+     \brief Node removing
+     */
 template <typename T>
-bool Tree<T>::remove (T val) { //удаление узла
+bool Tree<T>::remove (T val) {
     if (!this->exists(val))
         return false;
     Node<T>* add = root;
@@ -201,12 +241,14 @@ bool Tree<T>::remove (T val) { //удаление узла
                 parrent->right = child;
             if (add->data < parrent->data)
                 parrent->left = child;
+            if(child != nullptr)
+                child -> parent = parrent;
         }
     }
     if ((add->left!=nullptr) && (add->right!=nullptr)) {
         Node<T>* mleft = add->right;
         Node<T>* befmleft = add;
-        while (mleft->left != nullptr) { //ищем самое крайнее левое (минимальное)
+        while (mleft->left != nullptr) {
             befmleft = mleft;
             mleft = mleft->left;
         }
@@ -216,56 +258,65 @@ bool Tree<T>::remove (T val) { //удаление узла
             befmleft -> left = nullptr;
         }
         else
-            befmleft->right= mleft->right;
+            mleft->parent->right= mleft->right;
     }
     delete removed;
     removed = nullptr;
     return true;
 }
-
+    /*!
+     \brief In-file-load
+     */
 template <typename T>
-bool Tree<T>::save(const std::string& path) { //запись дерева в файл
-    struct stat buffer;
-    if (stat(path.c_str(), &buffer) == 0) {
-        std::string nAns;
+bool Tree<T>::save(const std::string& path) {
+    std::ifstream fin(path.c_str());
+    if (!fin.is_open()) {
+        std::ofstream fout(path.c_str());
+        fout << *this;
+        fout.close();
+        return true;
+    }
+    else {
+        std::string sAns;
         std::cout << "Перезаписать файл? (y/n)" << std::endl;
-        std::cin >> nAns;
-        if ((nAns == "y") || (nAns == "Y") || (nAns == "yes") || (nAns == "Yes") || (nAns == "YES")) {
-            std::ofstream fout(path, std::ios_base::trunc);
+        std::cin >> sAns;
+        if ((sAns == "y") || (sAns == "Y") || (sAns == "yes") || (sAns == "Yes") || (sAns == "YES")) {
+            std::ofstream fout(path.c_str());
             fout << *this;
             fout.close();
+            return true;
         }
         else
             return false;
     }
-    else {
-        std::ofstream fout(path, std::ios_base::trunc);
-        fout << *this;
-        fout.close();
-    }
-    return true;
 }
-
+    /*!
+     \brief Out-file-load
+     */
 template <typename T>
-bool Tree<T>::load(const std::string& path) { //загрузка дерева из файла
+bool Tree<T>::load(const std::string& path) {
     std::ifstream fin(path.c_str());
     if (!fin.is_open())
         return false;
-    this->clean(root);
-    this->root = nullptr;
+    this->~Tree();
     T value;
     fin >> value;
-    if(!fin)
+    if(!fin) {
         return false;
+        fin.close();
+    }
     while(fin) {
         this->insert(value);
         fin >> value;
     }
+    fin.close();
     return true;
 }
-
+    /*!
+     \brief Direct print
+     */
 template <typename T>
-auto direct_print(std::ostream& stream, Node<T>* node) -> std::ostream& { //прямой вывод узлов дерева
+auto direct_print(std::ostream& stream, Node<T>* node) -> std::ostream& {
     if (node != nullptr) {
         stream << node->data << " ";
         direct_print(stream, node->left);
@@ -273,10 +324,11 @@ auto direct_print(std::ostream& stream, Node<T>* node) -> std::ostream& { //пр
     }
     return stream;
 }
-
-
+        /*!
+         \brief Symmetric print
+         */
 template <typename T>
-auto symmetric_print(std::ostream& stream, Node<T>* node) -> std::ostream& { //симметричный вывод узлов дерева
+auto symmetric_print(std::ostream& stream, Node<T>* node) -> std::ostream& {
     if (node != nullptr) {
         symmetric_print(stream, node->left);
         stream << node->data << " ";
@@ -284,9 +336,11 @@ auto symmetric_print(std::ostream& stream, Node<T>* node) -> std::ostream& { //�
     }
     return stream;
 }
-
+        /*!
+         \brief Reverse print
+         */
 template <typename T>
-auto reverse_print(std::ostream& stream, Node<T>* node) -> std::ostream& { //обратный вывод узлов дерева
+auto reverse_print(std::ostream& stream, Node<T>* node) -> std::ostream& {
     if (node != nullptr) {
         reverse_print(stream, node->left);
         reverse_print(stream, node->right);
@@ -294,20 +348,22 @@ auto reverse_print(std::ostream& stream, Node<T>* node) -> std::ostream& { //о�
     }
     return stream;
 }
-
-template <typename T>
-auto Tree<T>::print(std::ostream& stream, traversal_order ord) const -> std::ostream& { //вывод узлов тремя способами
-    switch (ord) {
-    case direct:
-        direct_print(stream, root);
-        break;
-    case symmetric:
-        symmetric_print(stream, root);
-        break;
-    case reverse:
-        reverse_print(stream, root);
-        break;
+        /*!
+         \brief Print-in-three-ways
+         */
+    template <typename T>
+    auto Tree<T>::print(std::ostream& stream, traversal_order ord) const -> std::ostream& {
+        switch (ord) {
+        case direct:
+            direct_print(stream, root);
+            break;
+        case symmetric:
+            symmetric_print(stream, root);
+            break;
+        case reverse:
+            reverse_print(stream, root);
+            break;
+        }
+        return stream;
     }
-    return stream;
-}
 }

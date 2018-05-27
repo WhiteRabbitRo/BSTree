@@ -25,5 +25,6 @@ int main(){
     
     tree3.save("text.txt"); //функция записи дерева в файл
     tree1.load("text.txt"); //функция загрузки дерева из файла
-    cout << tree1;
+    cout << tree1 << endl;
+    exit(0);
 }
